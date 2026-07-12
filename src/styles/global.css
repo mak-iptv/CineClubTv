@@ -275,15 +275,31 @@ a { text-decoration:none; color:inherit; }
             border-color: #4f46e5;
         }
         .marquee-bar {
-            background: #1f2937;
-            padding: 6px 0;
-            overflow: hidden;
-            white-space: nowrap;
-            font-size: 0.8rem;
-            color: #fbbf24;
-            border-bottom: 1px solid #374151;
-        }
-        .marquee-bar marquee { display: block; }
+  background: #1f2937;
+  padding: 6px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: #fbbf24;
+  border-bottom: 1px solid #374151;
+  position: relative;
+}
+
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marqueeScroll 20s linear infinite;
+}
+
+.marquee-track span {
+  display: inline-block;
+  padding-right: 50px; /* razmak između dupliranih tekstova */
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
         .main-content { padding: 20px 0; }
         
         @media (max-width: 768px) {
