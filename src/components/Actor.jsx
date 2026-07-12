@@ -1,9 +1,9 @@
 // src/components/Actor.jsx
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';  // uklonili smo Link
 import { fetchTMDB, getImageUrl } from '../api/tmdb';
 import { useLanguage } from '../context/LanguageContext';
-import MovieCard from './MovieCard';  // <-- DODAJ OVO
+import MovieCard from './MovieCard';
 
 const Actor = () => {
   const [params] = useSearchParams();
