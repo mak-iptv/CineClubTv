@@ -1,3 +1,4 @@
+// src/components/ActorSearch.jsx
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { fetchTMDB, getImageUrl } from '../api/tmdb';
@@ -11,14 +12,13 @@ const ActorSearch = () => {
   const { t, lang } = useLanguage();
   const [actors, setActors] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
-  const [totalResults, setTotalResults] = useState(0);
+  // uklonili smo totalResults jer nije korišćena
 
   useEffect(() => {
     const endpoint = query ? `/search/person?query=${encodeURIComponent(query)}&page=${page}` : `/person/popular?page=${page}`;
     fetchTMDB(endpoint, lang).then(data => {
       setActors(data.results || []);
       setTotalPages(data.total_pages || 1);
-      setTotalResults(data.total_results || 0);
     });
   }, [query, page, lang]);
 
