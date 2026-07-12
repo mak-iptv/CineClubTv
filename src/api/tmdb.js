@@ -33,7 +33,7 @@ export const VIDEO_SOURCES = {
   },
   superembed: {
     name: { sr: "Server 3 (SE)", sq: "Serveri 3 (SE)", en: "Server 3 (SE)" },
-    movieUrl: "/se_player.php?video_id={id}&tmdb=1",
-    tvUrl: "/se_player.php?video_id={id}&tmdb=1&season={season}&episode={episode}"
+    movieUrl: "https://radio-malaprespa.duckdns.org/CineClub/se_player.php?video_id={id}&tmdb=1",
+    tvUrl: "https://radio-malaprespa.duckdns.org/CineClub/se_player.php?video_id={id}&tmdb=1&season={season}&episode={episode}"
   }
 };
