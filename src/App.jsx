@@ -15,6 +15,7 @@ function App() {
   return (
     <LanguageProvider>
       <Router>
+         <AdblockNotice />
         <Header />
         <main className="main-content">
           <Routes>
