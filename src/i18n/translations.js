@@ -26,6 +26,7 @@ export const translations = {
     no_results: 'Nema rezultata',
     showing: 'prikazano:',
     marquee: 'NOVI FILMOVI SVAKI DAN! ★ GLEDAJ BESPLATNO!',
+    adblock_notice: '🔇 Za bolje iskustvo, preporučujemo korišćenje AdBlock-a.',
     
   },
   en: {
@@ -55,6 +56,7 @@ export const translations = {
     no_results: 'No results',
     showing: 'showing:',
      marquee: 'NEW MOVIES EVERY DAY! ★ WATCH FOR FREE!',
+    adblock_notice: '🔇 For a better experience, we recommend using AdBlock.',
   },
   sq: {
     nav_home: 'Kryefaqja',
@@ -83,5 +85,6 @@ export const translations = {
     no_results: 'Nuk ka rezultate',
     showing: 'duke treguar:',
     marquee: 'FILMA TË REJA ÇDO DITË! ★ SHIKO FALAS!',
+    adblock_notice: '🔇 Për një përvojë më të mirë, rekomandojmë përdorimin e AdBlock-ut.',
   }
 };
