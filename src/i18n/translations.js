@@ -17,6 +17,7 @@ export const translations = {
     all_years: 'Sve godine',
     search_placeholder: 'Pretraži...',
     filter_btn: 'Filtriraj',
+     
 
     // Slider i kartice
     now_playing_badge: '🎬 Najnoviji',
@@ -56,7 +57,7 @@ export const translations = {
     nav_movies: 'Movies',
     nav_series: 'TV Shows',
     nav_actors: 'Actors',
-
+    follow_us: 'Follow us:',
     // Pretraga i filteri
     search_actors_placeholder: 'Search actors...',
     search_actors_title: 'Actor Search',
@@ -106,7 +107,7 @@ export const translations = {
     nav_movies: 'Filmat',
     nav_series: 'Serialet',
     nav_actors: 'Aktorët',
-
+    follow_us: 'Naqni ne:',
     // Pretraga i filteri
     search_actors_placeholder: 'Kërko aktorët...',
     search_actors_title: 'Kërkimi i aktorëve',
