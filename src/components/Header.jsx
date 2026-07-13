@@ -30,6 +30,9 @@ const Header = () => {
         <Link to="/tv" className={isActive('/tv') ? 'active' : ''}>
           <i className="fas fa-tv"></i> {t('nav_series')}
         </Link>
+        <Link to="/actors" className={isActive('/actors') ? 'active' : ''}>
+  <i className="fas fa-user"></i> {t('nav_actors')}
+</Link>
       </nav>
       <div className="top-bar-right">
         <div className="online-indicator">
