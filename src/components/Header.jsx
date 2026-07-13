@@ -35,32 +35,31 @@ const Header = () => {
 </Link>
       </nav>
       <div className="top-bar-right">
-        <div className="online-indicator">
-          <span className="dot"></span>
-          <span>{t('online_label')}</span>
-          <span className="count">{Math.floor(Math.random() * 130 + 120)}</span>
-        </div>
-        
-        <form className="actor-search-form" onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder={t('search_actors_placeholder')}
-            value={searchActor}
-            onChange={(e) => setSearchActor(e.target.value)}
-          />
-          <button type="submit"><i className="fas fa-user"></i></button>
-        </form>
-        <div className="social-icons">
-  <a href="https://t.me/+FcDQ_D71KOtlYjhk" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-    <i className="fa fa-telegram"></i>
-  </a>
-         </div> 
-        <div className="language-switcher">
-          <button onClick={() => setLang('sr')} className={lang === 'sr' ? 'active' : ''}>SRB</button>
-          <button onClick={() => setLang('en')} className={lang === 'en' ? 'active' : ''}>EN</button>
-          <button onClick={() => setLang('sq')} className={lang === 'sq' ? 'active' : ''}>SQ</button>
-        </div>
-      </div>
+  <div className="online-indicator">
+    <span className="dot"></span>
+    <span>{t('online_label')}</span>
+    <span className="count">{Math.floor(Math.random() * 130 + 120)}</span>
+  </div>
+
+  <form className="actor-search-form" onSubmit={handleSearch}>
+    <input type="text" placeholder={t('search_actors_placeholder')} value={searchActor} onChange={(e) => setSearchActor(e.target.value)} />
+    <button type="submit"><i className="fas fa-user"></i></button>
+  </form>
+
+  {/* ====== SOCIJALNE IKONE ====== */}
+  <div className="social-icons">
+    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
+    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
+  </div>
+
+  <div className="language-switcher">
+    <button onClick={() => setLang('sr')} className={lang === 'sr' ? 'active' : ''}>SRB</button>
+    <button onClick={() => setLang('en')} className={lang === 'en' ? 'active' : ''}>EN</button>
+    <button onClick={() => setLang('sq')} className={lang === 'sq' ? 'active' : ''}>SQ</button>
+  </div>
+</div>
     </header>
   );
 };
