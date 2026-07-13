@@ -40,6 +40,11 @@ const Header = () => {
           <span>{t('online_label')}</span>
           <span className="count">{Math.floor(Math.random() * 130 + 120)}</span>
         </div>
+        <div className="social-icons">
+  <a href="https://t.me/+FcDQ_D71KOtlYjhk" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+    <i className="fab fa-telegram"></i>
+  </a>
+         </div> 
         <form className="actor-search-form" onSubmit={handleSearch}>
           <input
             type="text"
