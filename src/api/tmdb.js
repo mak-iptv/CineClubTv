@@ -31,7 +31,7 @@ export const VIDEO_SOURCES = {
     movieUrl: "https://vidsrc.to/embed/movie/{id}",
     tvUrl: "https://vidsrc.to/embed/tv/{id}"
   },
-   vidsrcTo: {
+   vidsrcin: {
     name: { sr: "Server 4", sq: "Serveri 4", en: "Server 4" },
     movieUrl: "https://vidsrc.in/embed/movie/{id}",
     tvUrl: "https://vidsrc.in/embed/tv/{id}"
