@@ -42,7 +42,7 @@ const Header = () => {
         </div>
         <div className="social-icons">
   <a href="https://t.me/+FcDQ_D71KOtlYjhk" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-    <i className="fab fa-telegram"></i>
+    <i className="fa fa-telegram"></i>
   </a>
          </div> 
         <form className="actor-search-form" onSubmit={handleSearch}>
