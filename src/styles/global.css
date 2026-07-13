@@ -350,3 +350,42 @@ a { text-decoration:none; color:inherit; }
 .adblock-close:hover {
   color: #fff;
 }
+
+/* Socijalne ikone u headeru */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.social-icons a {
+  color: #9ca3af;
+  font-size: 1.1rem;
+  transition: 0.2s;
+}
+.social-icons a:hover {
+  color: #4f46e5;
+  transform: scale(1.1);
+}
+
+/* Socijalne ikone u footeru */
+.social-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.social-footer span {
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+.social-footer a {
+  color: #9ca3af;
+  font-size: 1.3rem;
+  transition: 0.2s;
+}
+.social-footer a:hover {
+  color: #4f46e5;
+  transform: scale(1.1);
+}
