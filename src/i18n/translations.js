@@ -2,7 +2,8 @@ export const translations = {
   sr: {
     nav_home: 'Početna',
     nav_movies: 'Filmovi',
-    nav_series: 'Serije',
+    nav_series: 'Serije',  
+    'nav_actors': 'Glumci',
     search_actors_placeholder: 'Pretraži glumce...',
     search_actors_title: 'Pretraga glumaca',
     popular_actors: 'Popularni glumci',
@@ -25,11 +26,13 @@ export const translations = {
     no_results: 'Nema rezultata',
     showing: 'prikazano:',
     marquee: 'NOVI FILMOVI SVAKI DAN! ★ GLEDAJ BESPLATNO!',
+    
   },
   en: {
     nav_home: 'Home',
     nav_movies: 'Movies',
     nav_series: 'TV Shows',
+    'nav_actors': 'Actors',
     search_actors_placeholder: 'Search actors...',
     search_actors_title: 'Actor Search',
     popular_actors: 'Popular Actors',
@@ -57,6 +60,7 @@ export const translations = {
     nav_home: 'Kryefaqja',
     nav_movies: 'Filmat',
     nav_series: 'Serialet',
+    'nav_actors': 'Aktorët',
     search_actors_placeholder: 'Kërko aktorët...',
     search_actors_title: 'Kërkimi i aktorëve',
     popular_actors: 'Aktorët e njohur',
