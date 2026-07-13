@@ -44,7 +44,6 @@ const Watch = () => {
   src={playerUrl} 
   allowFullScreen 
   title="player"
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
 ></iframe>
       </div>
       <div className="source-selector">
