@@ -44,7 +44,7 @@ const Watch = () => {
   src={playerUrl} 
   allowFullScreen 
   title="player"
-></iframe>
+referrerpolicy="origin"></iframe>
       </div>
       <div className="source-selector">
         {Object.keys(VIDEO_SOURCES).map(key => (
