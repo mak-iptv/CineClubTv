@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <header className="top-bar">
-      <div className="logo">CINE<span>FLIX</span></div>
+      <div className="logo">CINE<span>CLUB</span></div>
       <nav>
         <Link to="/" className={isActive('/') ? 'active' : ''}>
           <i className="fas fa-home"></i> {t('nav_home')}
