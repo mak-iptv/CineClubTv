@@ -12,10 +12,10 @@ const Footer = () => {
             <span className="online-dot"></span>
             <span>{t('online_label')} <span id="onlineCount">{Math.floor(Math.random() * 130 + 120)}</span></span>
           </div>
-          <p><strong>radio-malaprespa.duckdns.org/CineClub/</strong> NE VRŠI strimovanje videozapisa niti hostuje sadržaj bilo koje vrste. Videozapisi koje gledate hostovani su i prikazani sa stranica kao što su YouTube, netu.tv, Megavideo, itd.</p>
+          <p><strong>cineclub-two.vercel.app</strong> NE VRŠI strimovanje videozapisa niti hostuje sadržaj bilo koje vrste. Videozapisi koje gledate hostovani su i prikazani sa stranica kao što su YouTube, netu.tv, Megavideo, itd.</p>
         </div>
         <div className="copyright-text">
-          &copy; 2026 CineClub &amp; radio-malaprespa.duckdns.org. Sva prava pripadaju vlasnicima medija i eksternim hostovima.
+          &copy; 2026 CineClub &amp; cineclub-two.vercel.app. Sva prava pripadaju vlasnicima medija i eksternim hostovima.
         </div>
       </div>
     </footer>
