@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import Header from './components/Header';
+import AdblockNotice from './components/AdblockNotice';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Movies from './components/Movies';
