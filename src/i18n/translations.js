@@ -5,6 +5,7 @@ export const translations = {
     nav_movies: 'Filmovi',
     nav_series: 'Serije',
     nav_actors: 'Glumci',
+    follow_us: 'Pratite nas:',
 
     // Pretraga i filteri
     search_actors_placeholder: 'Pretraži glumce...',
