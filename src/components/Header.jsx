@@ -40,11 +40,7 @@ const Header = () => {
           <span>{t('online_label')}</span>
           <span className="count">{Math.floor(Math.random() * 130 + 120)}</span>
         </div>
-        <div className="social-icons">
-  <a href="https://t.me/+FcDQ_D71KOtlYjhk" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-    <i className="fa fa-telegram"></i>
-  </a>
-         </div> 
+        
         <form className="actor-search-form" onSubmit={handleSearch}>
           <input
             type="text"
@@ -54,6 +50,11 @@ const Header = () => {
           />
           <button type="submit"><i className="fas fa-user"></i></button>
         </form>
+        <div className="social-icons">
+  <a href="https://t.me/+FcDQ_D71KOtlYjhk" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+    <i className="fa fa-telegram"></i>
+  </a>
+         </div> 
         <div className="language-switcher">
           <button onClick={() => setLang('sr')} className={lang === 'sr' ? 'active' : ''}>SRB</button>
           <button onClick={() => setLang('en')} className={lang === 'en' ? 'active' : ''}>EN</button>
