@@ -40,11 +40,7 @@ const Watch = () => {
   return (
     <div className="watch-container">
       <div className="video-wrapper">
-        <iframe 
-  src={playerUrl} 
-  allowFullScreen 
-  title="player"
-referrerpolicy="origin"></iframe>
+       <iframe src="{playerUrl}" style="width: 100%; height: 100%;" frameborder="0" referrerpolicy="origin" allowfullscreen></iframe>';
       </div>
       <div className="source-selector">
         {Object.keys(VIDEO_SOURCES).map(key => (
