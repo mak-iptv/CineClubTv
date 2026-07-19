@@ -82,7 +82,7 @@ export const VIDEO_SOURCES = {
     name: { sr: 'Server 1', sq: 'Serveri 1', en: 'Server 1' },
     movieUrl: 'https://vidsrc.to/embed/movie/{id}',
     tvUrl: 'https://vidsrc.to/embed/tv/{id}',
-    supportsSeason: false, // не поддржува сезона/епизода во шаблонот
+    supportsSeason: false,
   },
   vidsrcin: {
     name: { sr: 'Server 4', sq: 'Serveri 4', en: 'Server 4' },
