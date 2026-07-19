@@ -38,7 +38,7 @@ export const VIDEO_SOURCES = {
   },
 
   vidfast: {
-    name: { sr: "Server 4", sq: "Serveri 4", en: "Server 4" },
+    name: { sr: "vidfast 4", sq: "vidfast 4", en: "vidfast 4" },
     movieUrl: "https://vidfast.vc/movie/{id}",
     tvUrl: "https://vidfast.vc/tv/{id}"
   },
