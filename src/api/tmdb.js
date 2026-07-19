@@ -36,6 +36,12 @@ export const VIDEO_SOURCES = {
     movieUrl: "https://vidsrc.in/embed/movie/{id}",
     tvUrl: "https://vidsrc.in/embed/tv/{id}"
   },
+
+  vidfast: {
+    name: { sr: "Server 4", sq: "Serveri 4", en: "Server 4" },
+    movieUrl: "https://vidfast.vc/movie/{id}",
+    tvUrl: "https://vidfast.vc/tv/{id}"
+  },
   superembed: {
     name: { sr: "Server 3 (SE)", sq: "Serveri 3 (SE)", en: "Server 3 (SE)" },
     movieUrl: "https://radio-malaprespa.duckdns.org/CineClub/se_player.php?video_id={id}&tmdb=1",
