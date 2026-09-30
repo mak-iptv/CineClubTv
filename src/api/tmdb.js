@@ -86,8 +86,8 @@ export const VIDEO_SOURCES = {
   },
   vidsrcin: {
     name: { sr: 'Server 4', sq: 'Serveri 4', en: 'Server 4' },
-    movieUrl: 'https://vidsrc.in/embed/movie/{id}',
-    tvUrl: 'https://vidsrc.in/embed/tv/{id}',
+    movieUrl: 'https://vidstuck.xyz/embed/movie/{id}',
+    tvUrl: 'https://vidstuck.xyz/embed/tv/{id}',
     supportsSeason: false,
   },
   vidfastvc: {
