@@ -135,7 +135,7 @@ const Watch = () => {
           {/* ГЛАВНИ УЛОГИ */}
           {mainCast.length > 0 && (
             <div className="cast-section">
-              <h3 className="cast-title">{t('main_cast') || '⭐ Главни улоги'}</h3>
+              <h3 className="cast-title">{t('⭐ Главни улоги') || '⭐ Главни улоги'}</h3>
               <div className="cast-grid-main">
                 {mainCast.map((actor) => (
                   <Link
