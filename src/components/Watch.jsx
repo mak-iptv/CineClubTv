@@ -34,7 +34,17 @@ const Watch = () => {
           fetchTMDB(`/${type}/${id}/credits`, lang),
         ]);
         setDetails(detailsData);
-        setCast(creditsData.cast || []);
+
+        // Отстрани дупликати по id
+        const uniqueCast = [];
+        const seen = new Set();
+        (creditsData.cast || []).forEach((actor) => {
+          if (!seen.has(actor.id)) {
+            seen.add(actor.id);
+            uniqueCast.push(actor);
+          }
+        });
+        setCast(uniqueCast);
       } catch (err) {
         setError(err.message || 'Failed to load data');
       } finally {
@@ -59,7 +69,6 @@ const Watch = () => {
 
   const playerUrl = getVideoUrl(source, type, id, season, episode);
 
-  // Подели актери на „главни“ и „останати“ – БЕЗ дупликати
   const mainCast = cast.slice(0, 4);
   const otherCast = cast.slice(4);
 
@@ -123,56 +132,71 @@ const Watch = () => {
 
           <p className="overview">{overview}</p>
 
-          {/* ГЛАВНИ УЛОГИ – само еднаш, првите 4 */}
+          {/* ГЛАВНИ УЛОГИ */}
           {mainCast.length > 0 && (
-            <div className="main-cast-section">
-              <h3>{t('main_cast') || 'Главни улоги'}</h3>
-              <div className="main-cast-grid">
+            <div className="cast-section">
+              <h3 className="cast-title">{t('main_cast') || '⭐ Главни улоги'}</h3>
+              <div className="cast-grid-main">
                 {mainCast.map((actor) => (
-                  <div key={actor.id} className="main-cast-card">
-                    {actor.profile_path ? (
-                      <img
-                        src={getImageUrl(actor.profile_path, 'w185')}
-                        alt={actor.name}
-                        className="main-cast-photo"
-                      />
-                    ) : (
-                      <div className="main-cast-photo no-photo">?</div>
-                    )}
-                    <div className="actor-info">
-                      <Link to={`/actor?id=${actor.id}`} className="main-cast-name">
-                        {actor.name}
-                      </Link>
-                      {actor.character && (
-                        <span className="main-cast-character">
-                          како {actor.character}
-                        </span>
+                  <Link
+                    to={`/actor?id=${actor.id}`}
+                    key={actor.id}
+                    className="actor-card-main"
+                  >
+                    <div className="actor-photo-wrapper">
+                      {actor.profile_path ? (
+                        <img
+                          src={getImageUrl(actor.profile_path, 'w300')}
+                          alt={actor.name}
+                          className="actor-photo"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="actor-photo no-photo">👤</div>
                       )}
                     </div>
-                  </div>
+                    <div className="actor-info">
+                      <span className="actor-name">{actor.name}</span>
+                      {actor.character && (
+                        <span className="actor-character">{actor.character}</span>
+                      )}
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>
           )}
 
-          {/* ОСТАНАТИ АКТЕРИ – само оние што не се веќе прикажани */}
+          {/* ОСТАНАТИ АКТЕРИ */}
           {otherCast.length > 0 && (
-            <div className="cast-container">
-              <h3>{t('cast_label') || 'Останати актери'}</h3>
-              <div className="cast-grid">
+            <div className="cast-section">
+              <h3 className="cast-title">{t('cast_label') || '🎭 Останати актери'}</h3>
+              <div className="cast-grid-all">
                 {otherCast.map((actor) => (
-                  <div key={actor.id} className="cast-card">
-                    {actor.profile_path ? (
-                      <img
-                        src={getImageUrl(actor.profile_path, 'w185')}
-                        alt={actor.name}
-                      />
-                    ) : (
-                      <div className="no-photo">?</div>
-                    )}
-                    <Link to={`/actor?id=${actor.id}`}>{actor.name}</Link>
-                    <span>{actor.character}</span>
-                  </div>
+                  <Link
+                    to={`/actor?id=${actor.id}`}
+                    key={actor.id}
+                    className="actor-card-small"
+                  >
+                    <div className="actor-photo-wrapper-small">
+                      {actor.profile_path ? (
+                        <img
+                          src={getImageUrl(actor.profile_path, 'w185')}
+                          alt={actor.name}
+                          className="actor-photo-small"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="actor-photo-small no-photo">👤</div>
+                      )}
+                    </div>
+                    <div className="actor-info-small">
+                      <span className="actor-name-small">{actor.name}</span>
+                      {actor.character && (
+                        <span className="actor-character-small">{actor.character}</span>
+                      )}
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>
