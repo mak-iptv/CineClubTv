@@ -105,34 +105,59 @@ const Watch = () => {
       </div>
 
       <div className="info-section">
-        <img src={getImageUrl(poster, 'w500')} alt={title} className="poster" />
-        <div className="details">
-          <h1>{title}</h1>
-          <div className="meta">
-            🎬 {type === 'movie' ? (t('movie') || 'Film') : (t('tv_series') || 'Serija')} • 
-            📅 {date ? new Date(date).getFullYear() : 'N/A'} • 
-            ⭐ {vote?.toFixed(1) || '?'}/10
-          </div>
-          <p>{overview}</p>
+  <img src={getImageUrl(poster, 'w500')} alt={title} className="poster" />
+  <div className="details">
+    <h1>{title}</h1>
+    <div className="meta">
+      🎬 {type === 'movie' ? (t('movie') || 'Film') : (t('tv_series') || 'Serija')} • 
+      📅 {date ? new Date(date).getFullYear() : 'N/A'} • 
+      ⭐ {vote?.toFixed(1) || '?'}/10
+    </div>
 
-          <div className="cast-container">
-            <h3>{t('main_cast') || 'Главни улоги'}</h3>
-            <div className="cast-grid">
-              {cast.map((actor) => (
-                <div key={actor.id} className="cast-card">
-                  <img src={getImageUrl(actor.profile_path, 'w185')} alt={actor.name} />
-                  <Link to={`/actor?id=${actor.id}`}>{actor.name}</Link>
-                  <span>{actor.character}</span>
-                </div>
-              ))}
+    {/* НОВА СЕКЦИЈА: Главни улоги */}
+    {cast.length > 0 && (
+      <div className="main-cast">
+        <h3>{t('main_cast') || 'Главни улоги'}</h3>
+        <div className="main-cast-grid">
+          {cast.slice(0, 3).map((actor) => (
+            <div key={actor.id} className="main-cast-card">
+              <img 
+                src={getImageUrl(actor.profile_path, 'w185')} 
+                alt={actor.name} 
+                className="main-cast-photo"
+              />
+              <Link to={`/actor?id=${actor.id}`} className="main-cast-name">
+                {actor.name}
+              </Link>
+              {actor.character && (
+                <span className="main-cast-character">{actor.character}</span>
+              )}
             </div>
-          </div>
-
-          <Link to={type === 'tv' ? '/tv' : '/'} className="back-link">
-            ← {t('back_to_home') || 'Back to home'}
-          </Link>
+          ))}
         </div>
       </div>
+    )}
+
+    <p>{overview}</p>
+
+    <div className="cast-container">
+      <h3>{t('cast_label') || 'Цела екипа'}</h3>
+      <div className="cast-grid">
+        {cast.map((actor) => (
+          <div key={actor.id} className="cast-card">
+            <img src={getImageUrl(actor.profile_path, 'w185')} alt={actor.name} />
+            <Link to={`/actor?id=${actor.id}`}>{actor.name}</Link>
+            <span>{actor.character}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <Link to={type === 'tv' ? '/tv' : '/'} className="back-link">
+      ← {t('back_to_home') || 'Back to home'}
+    </Link>
+  </div>
+</div>
     </div>
   );
 };
