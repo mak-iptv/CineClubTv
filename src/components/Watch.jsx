@@ -17,7 +17,6 @@ const Watch = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Кога се менува id, type, lang – вчитај податоци
   useEffect(() => {
     if (!id) {
       setError('No ID provided');
@@ -35,7 +34,7 @@ const Watch = () => {
           fetchTMDB(`/${type}/${id}/credits`, lang),
         ]);
         setDetails(detailsData);
-        setCast(creditsData.cast?.slice(0, 10) || []);
+        setCast(creditsData.cast || []);
       } catch (err) {
         setError(err.message || 'Failed to load data');
       } finally {
@@ -46,34 +45,23 @@ const Watch = () => {
     loadData();
   }, [id, type, lang]);
 
-  // Ако нема id или сè уште се вчитува
-  if (!id) {
-    return <div className="error">{t('missing_id') || 'Missing ID'}</div>;
-  }
-
-  if (loading) {
-    return <div className="loading">{t('loading') || 'Loading...'}</div>;
-  }
-
-  if (error) {
-    return <div className="error">{t('error') || 'Error'}: {error}</div>;
-  }
-
-  if (!details) {
-    return <div className="error">{t('no_data') || 'No data found'}</div>;
-  }
+  if (!id) return <div className="error">{t('missing_id') || 'Missing ID'}</div>;
+  if (loading) return <div className="loading">{t('loading') || 'Loading...'}</div>;
+  if (error) return <div className="error">{t('error') || 'Error'}: {error}</div>;
+  if (!details) return <div className="error">{t('no_data') || 'No data found'}</div>;
 
   const title = type === 'movie' ? details.title : details.name;
   const poster = details.poster_path;
   const overview = details.overview || t('no_description') || 'No description available.';
   const date = type === 'movie' ? details.release_date : details.first_air_date;
   const vote = details.vote_average;
+  const genres = details.genres ? details.genres.map(g => g.name).join(', ') : '';
 
-  // Генерирај URL за плеерот користејќи ја новата функција
   const playerUrl = getVideoUrl(source, type, id, season, episode);
 
   return (
     <div className="watch-container">
+      {/* Видео Плеер */}
       <div className="video-wrapper">
         {playerUrl ? (
           <iframe
@@ -89,6 +77,7 @@ const Watch = () => {
         )}
       </div>
 
+      {/* Избор на извори */}
       <div className="source-selector">
         {Object.keys(VIDEO_SOURCES).map((key) => {
           const sourceName = VIDEO_SOURCES[key].name[lang] || VIDEO_SOURCES[key].name.en || key;
@@ -104,60 +93,72 @@ const Watch = () => {
         })}
       </div>
 
+      {/* Информации за филмот/серијата */}
       <div className="info-section">
-  <img src={getImageUrl(poster, 'w500')} alt={title} className="poster" />
-  <div className="details">
-    <h1>{title}</h1>
-    <div className="meta">
-      🎬 {type === 'movie' ? (t('movie') || 'Film') : (t('tv_series') || 'Serija')} • 
-      📅 {date ? new Date(date).getFullYear() : 'N/A'} • 
-      ⭐ {vote?.toFixed(1) || '?'}/10
-    </div>
+        <img src={getImageUrl(poster, 'w500')} alt={title} className="poster" />
+        
+        <div className="details">
+          <h1>{title}</h1>
+          
+          <div className="meta">
+            <span>🎬 {type === 'movie' ? (t('movie') || 'Film') : (t('tv_series') || 'Serija')}</span>
+            <span>📅 {date ? new Date(date).getFullYear() : 'N/A'}</span>
+            <span>⭐ {vote?.toFixed(1) || '?'}/10</span>
+            {genres && <span>🎭 {genres}</span>}
+          </div>
 
-    {/* НОВА СЕКЦИЈА: Главни улоги */}
-    {cast.length > 0 && (
-      <div className="main-cast">
-        <h3>{t('main_cast') || 'Главни улоги'}</h3>
-        <div className="main-cast-grid">
-          {cast.slice(0, 3).map((actor) => (
-            <div key={actor.id} className="main-cast-card">
-              <img 
-                src={getImageUrl(actor.profile_path, 'w185')} 
-                alt={actor.name} 
-                className="main-cast-photo"
-              />
-              <Link to={`/actor?id=${actor.id}`} className="main-cast-name">
-                {actor.name}
-              </Link>
-              {actor.character && (
-                <span className="main-cast-character">{actor.character}</span>
-              )}
+          <p className="overview">{overview}</p>
+
+          {/* Главни улоги (Првите 3-4 актери) */}
+          {cast.length > 0 && (
+            <div className="main-cast-section">
+              <h3>{t('main_cast') || 'Главни улоги'}</h3>
+              <div className="main-cast-grid">
+                {cast.slice(0, 4).map((actor) => (
+                  <div key={actor.id} className="main-cast-card">
+                    <img 
+                      src={actor.profile_path ? getImageUrl(actor.profile_path, 'w185') : '/placeholder-actor.png'} 
+                      alt={actor.name} 
+                      className="main-cast-photo"
+                    />
+                    <div className="actor-info">
+                      <Link to={`/actor?id=${actor.id}`} className="main-cast-name">
+                        {actor.name}
+                      </Link>
+                      {actor.character && (
+                        <span className="main-cast-character"> како {actor.character}</span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
+          )}
+
+          {/* Цела екипа (Останати актери) */}
+          {cast.length > 4 && (
+            <div className="cast-container">
+              <h3>{t('cast_label') || 'Цела екипа'}</h3>
+              <div className="cast-grid">
+                {cast.slice(4).map((actor) => (
+                  <div key={actor.id} className="cast-card">
+                    <img 
+                      src={actor.profile_path ? getImageUrl(actor.profile_path, 'w185') : '/placeholder-actor.png'} 
+                      alt={actor.name} 
+                    />
+                    <Link to={`/actor?id=${actor.id}`}>{actor.name}</Link>
+                    <span>{actor.character}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <Link to={type === 'tv' ? '/tv' : '/'} className="back-link">
+            ← {t('back_to_home') || 'Back to home'}
+          </Link>
         </div>
       </div>
-    )}
-
-    <p>{overview}</p>
-
-    <div className="cast-container">
-      <h3>{t('cast_label') || 'Цела екипа'}</h3>
-      <div className="cast-grid">
-        {cast.map((actor) => (
-          <div key={actor.id} className="cast-card">
-            <img src={getImageUrl(actor.profile_path, 'w185')} alt={actor.name} />
-            <Link to={`/actor?id=${actor.id}`}>{actor.name}</Link>
-            <span>{actor.character}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <Link to={type === 'tv' ? '/tv' : '/'} className="back-link">
-      ← {t('back_to_home') || 'Back to home'}
-    </Link>
-  </div>
-</div>
     </div>
   );
 };
