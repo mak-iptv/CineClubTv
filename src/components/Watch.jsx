@@ -13,7 +13,7 @@ const Watch = () => {
 
   const [details, setDetails] = useState(null);
   const [cast, setCast] = useState([]);
-  const [source, setSource] = useState('embedSu');
+  const [source, setSource] = useState(Object.keys(VIDEO_SOURCES)[0]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -55,9 +55,13 @@ const Watch = () => {
   const overview = details.overview || t('no_description') || 'No description available.';
   const date = type === 'movie' ? details.release_date : details.first_air_date;
   const vote = details.vote_average;
-  const genres = details.genres ? details.genres.map(g => g.name).join(', ') : '';
+  const genres = details.genres ? details.genres.map((g) => g.name).join(', ') : '';
 
   const playerUrl = getVideoUrl(source, type, id, season, episode);
+
+  // Подели актери на „главни“ и „останати“ – БЕЗ дупликати
+  const mainCast = cast.slice(0, 4);
+  const otherCast = cast.slice(4);
 
   return (
     <div className="watch-container">
@@ -65,6 +69,7 @@ const Watch = () => {
       <div className="video-wrapper">
         {playerUrl ? (
           <iframe
+            key={source}
             src={playerUrl}
             style={{ width: '100%', height: '100%', border: 'none' }}
             frameBorder="0"
@@ -73,14 +78,19 @@ const Watch = () => {
             title="Video player"
           />
         ) : (
-          <div className="no-player">{t('no_player_available') || 'No player available for this source.'}</div>
+          <div className="no-player">
+            {t('no_player_available') || 'No player available for this source.'}
+          </div>
         )}
       </div>
 
       {/* Избор на извори */}
       <div className="source-selector">
         {Object.keys(VIDEO_SOURCES).map((key) => {
-          const sourceName = VIDEO_SOURCES[key].name[lang] || VIDEO_SOURCES[key].name.en || key;
+          const sourceName =
+            VIDEO_SOURCES[key].name?.[lang] ||
+            VIDEO_SOURCES[key].name?.en ||
+            key;
           return (
             <button
               key={key}
@@ -95,11 +105,15 @@ const Watch = () => {
 
       {/* Информации за филмот/серијата */}
       <div className="info-section">
-        <img src={getImageUrl(poster, 'w500')} alt={title} className="poster" />
-        
+        <img
+          src={poster ? getImageUrl(poster, 'w500') : '/placeholder-poster.png'}
+          alt={title}
+          className="poster"
+        />
+
         <div className="details">
           <h1>{title}</h1>
-          
+
           <div className="meta">
             <span>🎬 {type === 'movie' ? (t('movie') || 'Film') : (t('tv_series') || 'Serija')}</span>
             <span>📅 {date ? new Date(date).getFullYear() : 'N/A'}</span>
@@ -109,24 +123,30 @@ const Watch = () => {
 
           <p className="overview">{overview}</p>
 
-          {/* Главни улоги (Првите 3-4 актери) */}
-          {cast.length > 0 && (
+          {/* ГЛАВНИ УЛОГИ – само еднаш, првите 4 */}
+          {mainCast.length > 0 && (
             <div className="main-cast-section">
               <h3>{t('main_cast') || 'Главни улоги'}</h3>
               <div className="main-cast-grid">
-                {cast.slice(0, 4).map((actor) => (
+                {mainCast.map((actor) => (
                   <div key={actor.id} className="main-cast-card">
-                    <img 
-                      src={actor.profile_path ? getImageUrl(actor.profile_path, 'w185') : '/placeholder-actor.png'} 
-                      alt={actor.name} 
-                      className="main-cast-photo"
-                    />
+                    {actor.profile_path ? (
+                      <img
+                        src={getImageUrl(actor.profile_path, 'w185')}
+                        alt={actor.name}
+                        className="main-cast-photo"
+                      />
+                    ) : (
+                      <div className="main-cast-photo no-photo">?</div>
+                    )}
                     <div className="actor-info">
                       <Link to={`/actor?id=${actor.id}`} className="main-cast-name">
                         {actor.name}
                       </Link>
                       {actor.character && (
-                        <span className="main-cast-character"> како {actor.character}</span>
+                        <span className="main-cast-character">
+                          како {actor.character}
+                        </span>
                       )}
                     </div>
                   </div>
@@ -135,17 +155,21 @@ const Watch = () => {
             </div>
           )}
 
-          {/* Цела екипа (Останати актери) */}
-          {cast.length > 4 && (
+          {/* ОСТАНАТИ АКТЕРИ – само оние што не се веќе прикажани */}
+          {otherCast.length > 0 && (
             <div className="cast-container">
-              <h3>{t('cast_label') || 'Цела екипа'}</h3>
+              <h3>{t('cast_label') || 'Останати актери'}</h3>
               <div className="cast-grid">
-                {cast.slice(4).map((actor) => (
+                {otherCast.map((actor) => (
                   <div key={actor.id} className="cast-card">
-                    <img 
-                      src={actor.profile_path ? getImageUrl(actor.profile_path, 'w185') : '/placeholder-actor.png'} 
-                      alt={actor.name} 
-                    />
+                    {actor.profile_path ? (
+                      <img
+                        src={getImageUrl(actor.profile_path, 'w185')}
+                        alt={actor.name}
+                      />
+                    ) : (
+                      <div className="no-photo">?</div>
+                    )}
                     <Link to={`/actor?id=${actor.id}`}>{actor.name}</Link>
                     <span>{actor.character}</span>
                   </div>
