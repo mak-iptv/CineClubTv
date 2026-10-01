@@ -116,7 +116,7 @@ const Watch = () => {
           <p>{overview}</p>
 
           <div className="cast-container">
-            <h3>{t('cast_label') || 'Cast'}</h3>
+            <h3>{t('main_cast') || 'Главни улоги'}</h3>
             <div className="cast-grid">
               {cast.map((actor) => (
                 <div key={actor.id} className="cast-card">
