@@ -68,8 +68,8 @@ export const getImageUrl = (path, size = 'w500') => {
 export const VIDEO_SOURCES = {
   embedSu: {
     name: { sr: 'Embed.su', sq: 'Embed.su', en: 'Embed.su' },
-    movieUrl: 'https://vidsrc-embed.ru/embed/movie/{id}',
-    tvUrl: 'https://vidsrc-embed.ru/embed/tv/{id}/{season}/{episode}',
+    movieUrl: 'https://vidsrc.mov/embed/movie/{id}',
+    tvUrl: 'https://vidsrc.mov/embed/tv/{id}/{season}/{episode}',
     supportsSeason: true,
   },
   twoEmbed: {
